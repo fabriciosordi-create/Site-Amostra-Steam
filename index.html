@@ -32,7 +32,7 @@
       min-height: 100vh;
     }
 
-    /* Animação Elástica nos Botões */
+    /* Animações Globais */
     @keyframes elastic-bounce {
       0% { transform: scale(1); }
       30% { transform: scale(0.85); }
@@ -40,6 +40,33 @@
       80% { transform: scale(0.96); }
       100% { transform: scale(1); }
     }
+
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(139, 92, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+    }
+
+    @keyframes slideUpFade {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Classe para animar elementos ao entrar na tela */
+    .animated-item {
+      opacity: 0;
+    }
+    
+    .tab-content.active .animated-item {
+      animation: slideUpFade 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }
 
     /* Container do App (Simula tela de celular) */
     .app-container {
@@ -67,13 +94,14 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.5s ease, visibility 0.5s;
     }
 
     #tela-inicio img {
       width: 220px;
       max-width: 80%;
       margin-bottom: 24px;
+      animation: slideUpFade 0.8s ease forwards;
     }
 
     #tela-inicio h1 {
@@ -83,6 +111,8 @@
       letter-spacing: 1px;
       margin-bottom: 40px;
       text-align: center;
+      opacity: 0;
+      animation: slideUpFade 0.8s ease 0.2s forwards;
     }
 
     .btn-iniciar {
@@ -96,7 +126,13 @@
       cursor: pointer;
       box-shadow: 0 6px 15px rgba(139, 92, 246, 0.35);
       transition: transform 0.2s, background 0.2s;
-      will-change: transform;
+      opacity: 0;
+      animation: slideUpFade 0.8s ease 0.4s forwards, pulse-glow 2s infinite 1.2s;
+      will-change: transform, box-shadow;
+    }
+
+    .btn-iniciar:hover {
+      transform: scale(1.05);
     }
 
     .btn-iniciar:active {
@@ -138,16 +174,10 @@
 
     .tab-content {
       display: none;
-      animation: fadeIn 0.3s ease-in-out;
     }
 
     .tab-content.active {
       display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Cartões e Elementos Globais */
@@ -158,6 +188,12 @@
       margin-bottom: 16px;
       box-shadow: 0 4px 12px rgba(139, 92, 246, 0.06);
       border: 1px solid rgba(139, 92, 246, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(139, 92, 246, 0.12);
     }
 
     .card h2 {
@@ -190,8 +226,15 @@
       font-weight: bold;
       color: var(--primary-dark);
       cursor: pointer;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
       will-change: transform;
+    }
+
+    .btn-bloco:hover {
+      background: #f5f3ff;
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 8px 15px rgba(139, 92, 246, 0.15);
+      border-color: var(--primary-color);
     }
 
     .btn-bloco:active {
@@ -199,6 +242,50 @@
       background: var(--primary-color);
       color: white;
       border-color: var(--primary-color);
+    }
+
+    /* Aba Professores */
+    .prof-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.06);
+      border: 1px solid rgba(139, 92, 246, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .prof-card:hover {
+      transform: translateX(5px);
+      border-color: var(--accent-color);
+    }
+
+    .prof-card img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent-color);
+      background-color: var(--bg-color);
+    }
+
+    .prof-info {
+      flex: 1;
+    }
+
+    .prof-info h3 {
+      font-size: 1.05rem;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+    }
+
+    .prof-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.3;
     }
 
     /* Modal / Detalhes do Bloco */
@@ -216,8 +303,13 @@
       margin-bottom: 12px;
       cursor: pointer;
       font-weight: bold;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.2s;
       will-change: transform;
+    }
+    
+    .btn-voltar:hover {
+      background: #ddd6fe;
+      transform: translateX(-4px);
     }
 
     .btn-voltar:active {
@@ -251,9 +343,9 @@
       font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
-      width: 33.33%;
+      width: 25%; /* Alterado para 25% por causa da 4ª aba */
       height: 100%;
-      transition: color 0.2s;
+      transition: color 0.3s, transform 0.2s;
       will-change: transform;
     }
 
@@ -262,10 +354,15 @@
       height: 22px;
       fill: currentColor;
       margin-bottom: 4px;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     .nav-btn.active {
       color: var(--primary-color);
+    }
+    
+    .nav-btn.active svg {
+      transform: translateY(-3px) scale(1.15);
     }
 
     .nav-btn:active {
@@ -301,8 +398,7 @@
     
     <!-- TELA DE INÍCIO -->
     <div id="tela-inicio">
-      <!-- Imagem referenciando a logo enviada -->
-      <img src="image_a49924.png" alt="Logo SESI">
+      <img src="image_a49924.png" alt="Logo SESI" onerror="this.style.display='none'">
       <h1>MOSTRA STEAM</h1>
       <button class="btn-iniciar" onclick="iniciarApp()">Iniciar</button>
     </div>
@@ -317,19 +413,19 @@
     <main>
       <!-- MENU 1: GERAL -->
       <section id="geral" class="tab-content active">
-        <div class="card">
+        <div class="card animated-item delay-1">
           <h2>Bem-vindo à Mostra STEAM!</h2>
           <p>Explore os projetos inovadores desenvolvidos pelos alunos nas áreas de Ciência, Tecnologia, Engenharia, Arte e Matemática.</p>
         </div>
 
-        <div class="card">
+        <div class="card animated-item delay-2">
           <h2>⏰ Horários & Cronograma</h2>
           <p><strong>Abertura:</strong> 08:00</p>
           <p><strong>Apresentações:</strong> 08:30 - 16:30</p>
           <p><strong>Premiação:</strong> 17:00</p>
         </div>
 
-        <div class="card">
+        <div class="card animated-item delay-3">
           <h2>ℹ️ Avisos Importantes</h2>
           <p>Vote nos seus projetos favoritos utilizando o QR Code disponível em cada estande!</p>
         </div>
@@ -337,7 +433,7 @@
 
       <!-- MENU 2: MAPA -->
       <section id="mapa" class="tab-content">
-        <div class="card">
+        <div class="card animated-item delay-1">
           <h2>Mapa do Evento</h2>
           <p>Localização do SESI / SENAI em Chapecó - SC:</p>
           <div class="map-container">
@@ -356,18 +452,18 @@
         
         <!-- Lista de Botões de A a F -->
         <div id="lista-blocos">
-          <div class="card">
+          <div class="card animated-item delay-1">
             <h2>Selecione um Bloco</h2>
             <p>Clique em um dos blocos abaixo para ver a lista de projetos expostos:</p>
           </div>
 
           <div class="grid-blocos">
-            <button class="btn-bloco" onclick="abrirBloco('A')">Bloco A</button>
-            <button class="btn-bloco" onclick="abrirBloco('B')">Bloco B</button>
-            <button class="btn-bloco" onclick="abrirBloco('C')">Bloco C</button>
-            <button class="btn-bloco" onclick="abrirBloco('D')">Bloco D</button>
-            <button class="btn-bloco" onclick="abrirBloco('E')">Bloco E</button>
-            <button class="btn-bloco" onclick="abrirBloco('F')">Bloco F</button>
+            <button class="btn-bloco animated-item delay-2" onclick="abrirBloco('A')">Bloco A</button>
+            <button class="btn-bloco animated-item delay-3" onclick="abrirBloco('B')">Bloco B</button>
+            <button class="btn-bloco animated-item delay-4" onclick="abrirBloco('C')">Bloco C</button>
+            <button class="btn-bloco animated-item delay-5" onclick="abrirBloco('D')">Bloco D</button>
+            <button class="btn-bloco animated-item delay-6" onclick="abrirBloco('E')">Bloco E</button>
+            <button class="btn-bloco animated-item delay-6" onclick="abrirBloco('F')">Bloco F</button>
           </div>
         </div>
 
@@ -382,7 +478,63 @@
             </div>
           </div>
         </div>
+      </section>
 
+      <!-- MENU 4: PROFESSORES (Nova Aba) -->
+      <section id="professores" class="tab-content">
+        <div class="card animated-item delay-1">
+          <h2>Corpo Docente</h2>
+          <p>Conheça os professores orientadores por trás dos incríveis projetos STEAM.</p>
+        </div>
+
+        <!-- Professores baseados nos dados fornecidos -->
+        <div class="prof-card animated-item delay-2">
+          <img src="https://ui-avatars.com/api/?name=Bruna&background=c4b5fd&color=2e1065&bold=true" alt="Prof. Bruna">
+          <div class="prof-info">
+            <h3>Bruna, Valéria e Daniele</h3>
+            <p><strong>Especialização:</strong> Ciências e Experimentos de Laboratório.</p>
+          </div>
+        </div>
+
+        <div class="prof-card animated-item delay-3">
+          <img src="https://ui-avatars.com/api/?name=Daniela&background=e9d5ff&color=4c1d95&bold=true" alt="Prof. Daniela">
+          <div class="prof-info">
+            <h3>Daniela, Tatiana e César</h3>
+            <p><strong>Especialização:</strong> Matemática, Raciocínio Lógico e Enigmas.</p>
+          </div>
+        </div>
+
+        <div class="prof-card animated-item delay-4">
+          <img src="https://ui-avatars.com/api/?name=Juliane&background=c4b5fd&color=2e1065&bold=true" alt="Prof. Juliane">
+          <div class="prof-info">
+            <h3>Juliane</h3>
+            <p><strong>Especialização:</strong> Engenharia e Desenvolvimento de Projetos Técnicos.</p>
+          </div>
+        </div>
+
+        <div class="prof-card animated-item delay-5">
+          <img src="https://ui-avatars.com/api/?name=Carla&background=e9d5ff&color=4c1d95&bold=true" alt="Prof. Carla">
+          <div class="prof-info">
+            <h3>Carla, Bruno e Rhaabe</h3>
+            <p><strong>Especialização:</strong> Arte, Cultura Globalizada, Geografia e Inglês.</p>
+          </div>
+        </div>
+
+        <div class="prof-card animated-item delay-6">
+          <img src="https://ui-avatars.com/api/?name=Cristiano&background=c4b5fd&color=2e1065&bold=true" alt="Prof. Cristiano">
+          <div class="prof-info">
+            <h3>Cristiano</h3>
+            <p><strong>Especialização:</strong> Cidadania, História e Direitos Sociais.</p>
+          </div>
+        </div>
+
+        <div class="prof-card animated-item delay-6">
+          <img src="https://ui-avatars.com/api/?name=Sávio&background=e9d5ff&color=4c1d95&bold=true" alt="Prof. Sávio">
+          <div class="prof-info">
+            <h3>Sávio</h3>
+            <p><strong>Especialização:</strong> Audiovisual, Fotografia e Mídias Digitais (Podcasts).</p>
+          </div>
+        </div>
       </section>
     </main>
 
@@ -400,6 +552,11 @@
         <svg viewBox="0 0 24 24"><path d="M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z"/></svg>
         Blocos
       </button>
+      <!-- NOVO BOTÃO: PROFESSORES -->
+      <button class="nav-btn" onclick="mudarAba('professores', this)">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        Profs
+      </button>
     </nav>
   </div>
 
@@ -408,9 +565,10 @@
     // Função para ocultar a tela de início com efeito de fade
     function iniciarApp() {
       const telaInicio = document.getElementById('tela-inicio');
-      telaInicio.style.opacity = '0'; // Dispara a transição CSS
+      telaInicio.style.opacity = '0';
+      telaInicio.style.visibility = 'hidden'; 
       setTimeout(() => {
-        telaInicio.style.display = 'none'; // Remove completamente o elemento após o fade
+        telaInicio.style.display = 'none'; 
       }, 500);
     }
 
@@ -475,8 +633,17 @@
         btn.classList.remove('active');
       });
 
-      document.getElementById(abaId).classList.add('active');
+      // Ativa a nova aba e reinicia as animações clonando os elementos animados
+      const abaAtiva = document.getElementById(abaId);
+      abaAtiva.classList.add('active');
       elementoBtn.classList.add('active');
+
+      // Truque simples para re-disparar as animações de entrada sempre que mudar de aba
+      abaAtiva.querySelectorAll('.animated-item').forEach(el => {
+        el.style.animation = 'none';
+        el.offsetHeight; /* trigger reflow */
+        el.style.animation = null; 
+      });
 
       if(abaId === 'blocos') {
         fecharBloco();
@@ -495,13 +662,13 @@
       const projetos = dadosBlocos[letraBloco] || [];
       
       if(projetos.length === 0) {
-        conteudo.innerHTML = "<p style='padding: 12px 0;'>Nenhum projeto cadastrado para este bloco ainda.</p>";
+        conteudo.innerHTML = "<p style='padding: 12px 0; color: var(--text-muted);'>Nenhum projeto cadastrado para este bloco ainda.</p>";
       } else {
-        conteudo.innerHTML = projetos.map(p => `
-          <div style="border-bottom: 1px solid #f3e8ff; padding: 12px 0;">
-            <strong style="color: var(--primary-dark); font-size: 1rem;">${p.titulo}</strong><br>
-            <small style="color: #ffffff; background: var(--primary-color); padding: 3px 8px; border-radius: 6px; font-weight: bold; display: inline-block; margin-top: 6px;">${p.sala}</small>
-            <p class="prof-tag"><strong>Prof. Responsável:</strong> ${p.professores}</p>
+        conteudo.innerHTML = projetos.map((p, index) => `
+          <div class="animated-item" style="border-bottom: 1px solid #f3e8ff; padding: 14px 0; animation-delay: ${0.1 * (index + 1)}s;">
+            <strong style="color: var(--primary-dark); font-size: 1.05rem;">${p.titulo}</strong><br>
+            <small style="color: #ffffff; background: var(--primary-color); padding: 4px 10px; border-radius: 6px; font-weight: bold; display: inline-block; margin-top: 8px;">Sala ${p.sala}</small>
+            <p class="prof-tag" style="margin-top: 8px;"><strong>Prof. Responsável:</strong> ${p.professores}</p>
           </div>
         `).join('');
       }
@@ -512,6 +679,13 @@
     function fecharBloco() {
       document.getElementById('detalhe-bloco').style.display = 'none';
       document.getElementById('lista-blocos').style.display = 'block';
+      
+      // Reinicia animação dos botões de bloco ao voltar
+      document.getElementById('lista-blocos').querySelectorAll('.animated-item').forEach(el => {
+        el.style.animation = 'none';
+        el.offsetHeight; 
+        el.style.animation = null; 
+      });
     }
   </script>
 </body>
