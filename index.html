@@ -19,7 +19,7 @@
       --accent-color: #c4b5fd;   /* Lilás claro para detalhes */
       --bg-color: #f7f5ff;       /* Fundo com leve toque arroxeado */
       --card-bg: #ffffff;
-      --text-color: #2e1065;     /* Texto num tom roxo bem escuro */
+      --text-color: #2e1065;      /* Texto num tom roxo bem escuro */
       --text-muted: #6b7280;
       --nav-height: 65px;
     }
@@ -208,6 +208,17 @@
       color: var(--text-muted);
     }
 
+    /* Estilo para imagem da sala nos detalhes do bloco */
+    .img-sala {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      border: 2px solid var(--accent-color);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
     /* Aba Blocos (Grid de A até F) */
     .grid-blocos {
       display: grid;
@@ -343,7 +354,7 @@
       font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
-      width: 25%; /* Alterado para 25% por causa da 4ª aba */
+      width: 25%;
       height: 100%;
       transition: color 0.3s, transform 0.2s;
       will-change: transform;
@@ -474,20 +485,19 @@
           <div class="card">
             <h2 id="titulo-bloco">Bloco X</h2>
             <div id="conteudo-bloco">
-              <!-- Os projetos serão inseridos dinamicamente aqui -->
+              <!-- Os projetos e imagens serão inseridos dinamicamente aqui -->
             </div>
           </div>
         </div>
       </section>
 
-      <!-- MENU 4: PROFESSORES (Nova Aba) -->
+      <!-- MENU 4: PROFESSORES -->
       <section id="professores" class="tab-content">
         <div class="card animated-item delay-1">
           <h2>Corpo Docente</h2>
           <p>Conheça os professores orientadores por trás dos incríveis projetos STEAM.</p>
         </div>
 
-        <!-- Professores baseados nos dados fornecidos -->
         <div class="prof-card animated-item delay-2">
           <img src="https://ui-avatars.com/api/?name=Bruna&background=c4b5fd&color=2e1065&bold=true" alt="Prof. Bruna">
           <div class="prof-info">
@@ -552,7 +562,6 @@
         <svg viewBox="0 0 24 24"><path d="M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z"/></svg>
         Blocos
       </button>
-      <!-- NOVO BOTÃO: PROFESSORES -->
       <button class="nav-btn" onclick="mudarAba('professores', this)">
         <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
         Profs
@@ -562,7 +571,6 @@
 
   <!-- Lógica em JavaScript -->
   <script>
-    // Função para ocultar a tela de início com efeito de fade
     function iniciarApp() {
       const telaInicio = document.getElementById('tela-inicio');
       telaInicio.style.opacity = '0';
@@ -572,7 +580,7 @@
       }, 500);
     }
 
-    // Dados dos Projetos
+    // Dados dos Projetos e Salas
     const dadosBlocos = {
       'A': [],
       'B': [
@@ -582,7 +590,38 @@
           professores: "Bruna, Valéria e Daniele" 
         }
       ],
-      'C': [],
+      'C': [
+        { 
+          titulo: "Laboratório de Eletrônica e Automação", 
+          sala: "C01", 
+          imagem: "C01.jpg", 
+          professores: "Equipe SENAI - Automação" 
+        },
+        { 
+          titulo: "Oficina de Montagem e Instalações Elétricas", 
+          sala: "C02", 
+          imagem: "C02.jpg", 
+          professores: "Equipe SENAI - Eletrotécnica" 
+        },
+        { 
+          titulo: "Laboratório de Informática e Desenvolvimento", 
+          sala: "C03", 
+          imagem: "C03.jpg", 
+          professores: "Equipe SENAI - TI" 
+        },
+        { 
+          titulo: "Centro de Usinagem CNC e Metalmecânica", 
+          sala: "C04", 
+          imagem: "C04.jpg", 
+          professores: "Equipe SENAI - Metalmecânica" 
+        },
+        { 
+          titulo: "Bancadas Práticas de Mecânica e Motores", 
+          sala: "C05", 
+          imagem: "C05.jpg", 
+          professores: "Equipe SENAI - Mecânica" 
+        }
+      ],
       'D': [],
       'E': [],
       'F': [
@@ -633,12 +672,10 @@
         btn.classList.remove('active');
       });
 
-      // Ativa a nova aba e reinicia as animações clonando os elementos animados
       const abaAtiva = document.getElementById(abaId);
       abaAtiva.classList.add('active');
       elementoBtn.classList.add('active');
 
-      // Truque simples para re-disparar as animações de entrada sempre que mudar de aba
       abaAtiva.querySelectorAll('.animated-item').forEach(el => {
         el.style.animation = 'none';
         el.offsetHeight; /* trigger reflow */
@@ -666,6 +703,7 @@
       } else {
         conteudo.innerHTML = projetos.map((p, index) => `
           <div class="animated-item" style="border-bottom: 1px solid #f3e8ff; padding: 14px 0; animation-delay: ${0.1 * (index + 1)}s;">
+            ${p.imagem ? `<img src="${p.imagem}" alt="Sala ${p.sala}" class="img-sala">` : ''}
             <strong style="color: var(--primary-dark); font-size: 1.05rem;">${p.titulo}</strong><br>
             <small style="color: #ffffff; background: var(--primary-color); padding: 4px 10px; border-radius: 6px; font-weight: bold; display: inline-block; margin-top: 8px;">Sala ${p.sala}</small>
             <p class="prof-tag" style="margin-top: 8px;"><strong>Prof. Responsável:</strong> ${p.professores}</p>
@@ -680,7 +718,6 @@
       document.getElementById('detalhe-bloco').style.display = 'none';
       document.getElementById('lista-blocos').style.display = 'block';
       
-      // Reinicia animação dos botões de bloco ao voltar
       document.getElementById('lista-blocos').querySelectorAll('.animated-item').forEach(el => {
         el.style.animation = 'none';
         el.offsetHeight; 
