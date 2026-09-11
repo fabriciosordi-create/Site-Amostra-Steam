@@ -441,8 +441,15 @@
         <div class="card animated-item delay-2">
           <h2>⏰ Horários & Cronograma</h2>
           <p><strong>Abertura:</strong> 08:00</p>
-          <p><strong>Apresentações:</strong> 08:00 - 11:00</p>
+          <p><strong>Apresentações:</strong> 08:30 - 16:30</p>
+          <p><strong>Premiação:</strong> 17:00</p>
         </div>
+
+        <div class="card animated-item delay-3">
+          <h2>ℹ️ Avisos Importantes</h2>
+          <p>Vote nos seus projetos favoritos utilizando o QR Code disponível em cada estande!</p>
+        </div>
+      </section>
 
       <!-- MENU 2: MAPA -->
       <section id="mapa" class="tab-content">
@@ -526,7 +533,7 @@
         </div>
 
         <div class="prof-card animated-item delay-3">
-          <img src="César.png" alt="Prof. César">
+          <img src="César.jpg" alt="Prof. César">
           <div class="prof-info">
             <h3>César</h3>
             <p><strong>Especialização:</strong> Matemática, Raciocínio Lógico e Enigmas.</p>
@@ -534,7 +541,7 @@
         </div>
 
         <div class="prof-card animated-item delay-4">
-          <img src="Cristiano.png" alt="Prof. Cristiano">
+          <img src="Cristiano.jpg" alt="Prof. Cristiano">
           <div class="prof-info">
             <h3>Cristiano</h3>
             <p><strong>Especialização:</strong> Português, Redação e Literatura.</p>
@@ -542,7 +549,7 @@
         </div>
 
         <div class="prof-card animated-item delay-4">
-          <img src="Daniele.png" alt="Prof. Daniele">
+          <img src="Daniele.jpg" alt="Prof. Daniele">
           <div class="prof-info">
             <h3>Daniele</h3>
             <p><strong>Especialização:</strong> Ciências e Projetos STEAM.</p>
@@ -550,7 +557,7 @@
         </div>
 
         <div class="prof-card animated-item delay-5">
-          <img src="Juliane.png" alt="Prof. Juliane">
+          <img src="Juliane.jpg" alt="Prof. Juliane">
           <div class="prof-info">
             <h3>Juliane</h3>
             <p><strong>Especialização:</strong> Engenharia e Desenvolvimento de Projetos Técnicos.</p>
@@ -558,7 +565,7 @@
         </div>
 
         <div class="prof-card animated-item delay-5">
-          <img src="Rhaabe.png" alt="Prof. Rhaabe">
+          <img src="Rhaabe.jpg" alt="Prof. Rhaabe">
           <div class="prof-info">
             <h3>Rhaabe</h3>
             <p><strong>Especialização:</strong> Inglês e Globalização em Arte.</p>
@@ -566,7 +573,7 @@
         </div>
 
         <div class="prof-card animated-item delay-6">
-          <img src="Sávio.png" alt="Prof. Sávio">
+          <img src="Sávio.jpg" alt="Prof. Sávio">
           <div class="prof-info">
             <h3>Sávio</h3>
             <p><strong>Especialização:</strong> Audiovisual, Fotografia e Mídias Digitais.</p>
@@ -578,14 +585,6 @@
           <div class="prof-info">
             <h3>Valéria</h3>
             <p><strong>Especialização:</strong> Ciências e Experimentos de Laboratório.</p>
-          </div>
-        </div>
-
-        <div class="prof-card animated-item delay-6">
-          <img src="Captura de tela 2026-09-11 151909.png" alt="Prof. Tatiana">
-          <div class="prof-info">
-            <h3>Tatiana</h3>
-            <p><strong>Especialização:</strong> Matemática e Desafios Lógicos.</p>
           </div>
         </div>
       </section>
@@ -628,6 +627,7 @@
         { 
           titulo: "Experimentos no Laboratório", 
           sala: "B03 e B04", 
+          imagens: ["B03.jpeg", "B04.jpeg"], // Aceita múltiplas imagens
           professores: "Bruna, Valéria e Daniele" 
         }
       ],
@@ -669,7 +669,7 @@
         { 
           titulo: "Jogos, desafios, charadas e enigmas matemáticos", 
           sala: "F01, F02 e F03", 
-          professores: "Tatiana e César" 
+          professores: "Daniela, Tatiana e César" 
         },
         { 
           titulo: "Engenheiro por um dia", 
@@ -679,6 +679,7 @@
         { 
           titulo: "Galeria de arte", 
           sala: "F08", 
+          imagem: "F08.jpeg",
           professores: "Carla" 
         },
         { 
@@ -689,6 +690,7 @@
         { 
           titulo: "Atividade STEAM F18", 
           sala: "F18", 
+          imagem: "F18.jpeg",
           professores: "Daniele" 
         },
         { 
@@ -742,14 +744,22 @@
       if(projetos.length === 0) {
         conteudo.innerHTML = "<p style='padding: 12px 0; color: var(--text-muted);'>Nenhum projeto cadastrado para este bloco ainda.</p>";
       } else {
-        conteudo.innerHTML = projetos.map((p, index) => `
+        conteudo.innerHTML = projetos.map((p, index) => {
+          let imagensHtml = '';
+          // Renderiza imagem única
+          if(p.imagem) imagensHtml += `<img src="${p.imagem}" alt="Sala ${p.sala}" class="img-sala">`;
+          // Renderiza múltiplas imagens
+          if(p.imagens) imagensHtml += p.imagens.map(img => `<img src="${img}" alt="Sala ${p.sala}" class="img-sala">`).join('');
+          
+          return `
           <div class="animated-item" style="border-bottom: 1px solid #f3e8ff; padding: 14px 0; animation-delay: ${0.1 * (index + 1)}s;">
-            ${p.imagem ? `<img src="${p.imagem}" alt="Sala ${p.sala}" class="img-sala">` : ''}
+            ${imagensHtml}
             <strong style="color: var(--primary-dark); font-size: 1.05rem;">${p.titulo}</strong><br>
             <small style="color: #ffffff; background: var(--primary-color); padding: 4px 10px; border-radius: 6px; font-weight: bold; display: inline-block; margin-top: 8px;">Sala ${p.sala}</small>
             <p class="prof-tag" style="margin-top: 8px;"><strong>Prof. Responsável:</strong> ${p.professores}</p>
           </div>
-        `).join('');
+          `;
+        }).join('');
       }
 
       areaDetalhe.style.display = 'block';
