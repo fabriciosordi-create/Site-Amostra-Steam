@@ -1,6 +1,3 @@
-
-
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -64,11 +61,11 @@
     }
 
     .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
-    .delay-4 { animation-delay: 0.4s; }
-    .delay-5 { animation-delay: 0.5s; }
-    .delay-6 { animation-delay: 0.6s; }
+    .delay-2 { animation-delay: 0.15s; }
+    .delay-3 { animation-delay: 0.2s; }
+    .delay-4 { animation-delay: 0.25s; }
+    .delay-5 { animation-delay: 0.3s; }
+    .delay-6 { animation-delay: 0.35s; }
 
     /* Container do App */
     .app-container {
@@ -286,12 +283,13 @@
     }
 
     .prof-card img {
-      width: 55px;
-      height: 55px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--accent-color);
+      border: 2px solid var(--primary-color);
       background-color: var(--bg-color);
+      flex-shrink: 0;
     }
 
     .prof-info {
@@ -511,23 +509,55 @@
         </div>
 
         <div class="prof-card animated-item delay-2">
-          <img src="https://ui-avatars.com/api/?name=Bruna&background=c4b5fd&color=2e1065&bold=true" alt="Prof. Bruna">
+          <img src="Bruna.jpg" alt="Prof. Bruna">
           <div class="prof-info">
-            <h3>Bruna, Valéria e Daniele</h3>
+            <h3>Bruna</h3>
             <p><strong>Especialização:</strong> Ciências e Experimentos de Laboratório.</p>
           </div>
         </div>
 
-        <div class="prof-card animated-item delay-3">
-          <img src="https://ui-avatars.com/api/?name=Daniela&background=e9d5ff&color=4c1d95&bold=true" alt="Prof. Daniela">
+        <div class="prof-card animated-item delay-2">
+          <img src="Bruno.jpg" alt="Prof. Bruno">
           <div class="prof-info">
-            <h3>Daniela, Tatiana e César</h3>
+            <h3>Bruno</h3>
+            <p><strong>Especialização:</strong> Geografia, Arte e Globalização.</p>
+          </div>
+        </div>
+
+        <div class="prof-card animated-item delay-3">
+          <img src="Carla.jpg" alt="Prof. Carla">
+          <div class="prof-info">
+            <h3>Carla</h3>
+            <p><strong>Especialização:</strong> Arte e Cultura Globalizada.</p>
+          </div>
+        </div>
+
+        <div class="prof-card animated-item delay-3">
+          <img src="César.jpg" alt="Prof. César">
+          <div class="prof-info">
+            <h3>César</h3>
             <p><strong>Especialização:</strong> Matemática, Raciocínio Lógico e Enigmas.</p>
           </div>
         </div>
 
         <div class="prof-card animated-item delay-4">
-          <img src="https://ui-avatars.com/api/?name=Juliane&background=c4b5fd&color=2e1065&bold=true" alt="Prof. Juliane">
+          <img src="Cristiano.jpg" alt="Prof. Cristiano">
+          <div class="prof-info">
+            <h3>Cristiano</h3>
+            <p><strong>Especialização:</strong> Português, Redação e Literatura.</p>
+          </div>
+        </div>
+
+        <div class="prof-card animated-item delay-4">
+          <img src="Daniele.jpg" alt="Prof. Daniele">
+          <div class="prof-info">
+            <h3>Daniele</h3>
+            <p><strong>Especialização:</strong> Ciências e Projetos STEAM.</p>
+          </div>
+        </div>
+
+        <div class="prof-card animated-item delay-5">
+          <img src="Juliane.jpg" alt="Prof. Juliane">
           <div class="prof-info">
             <h3>Juliane</h3>
             <p><strong>Especialização:</strong> Engenharia e Desenvolvimento de Projetos Técnicos.</p>
@@ -535,26 +565,42 @@
         </div>
 
         <div class="prof-card animated-item delay-5">
-          <img src="https://ui-avatars.com/api/?name=Carla&background=e9d5ff&color=4c1d95&bold=true" alt="Prof. Carla">
+          <img src="Rhaabe.jpg" alt="Prof. Rhaabe">
           <div class="prof-info">
-            <h3>Carla, Bruno e Rhaabe</h3>
-            <p><strong>Especialização:</strong> Arte, Cultura Globalizada, Geografia e Inglês.</p>
+            <h3>Rhaabe</h3>
+            <p><strong>Especialização:</strong> Inglês e Globalização em Arte.</p>
           </div>
         </div>
 
         <div class="prof-card animated-item delay-6">
-          <img src="https://ui-avatars.com/api/?name=Cristiano&background=c4b5fd&color=2e1065&bold=true" alt="Prof. Cristiano">
-          <div class="prof-info">
-            <h3>Cristiano</h3>
-            <p><strong>Especialização:</strong> Português, redação e Literatura.</p>
-          </div>
-        </div>
-
-        <div class="prof-card animated-item delay-6">
-          <img src="https://ui-avatars.com/api/?name=Sávio&background=e9d5ff&color=4c1d95&bold=true" alt="Prof. Sávio">
+          <img src="Sávio.jpg" alt="Prof. Sávio">
           <div class="prof-info">
             <h3>Sávio</h3>
             <p><strong>Especialização:</strong> Audiovisual, Fotografia e Mídias Digitais.</p>
+          </div>
+        </div>
+
+        <div class="prof-card animated-item delay-6">
+          <img src="Valéria.jpg" alt="Prof. Valéria">
+          <div class="prof-info">
+            <h3>Valéria</h3>
+            <p><strong>Especialização:</strong> Ciências e Experimentos de Laboratório.</p>
+          </div>
+        </div>
+
+        <div class="prof-card animated-item delay-6">
+          <img src="https://ui-avatars.com/api/?name=Daniela&background=e9d5ff&color=4c1d95&bold=true" alt="Prof. Daniela">
+          <div class="prof-info">
+            <h3>Daniela</h3>
+            <p><strong>Especialização:</strong> Matemática, Raciocínio Lógico e Enigmas.</p>
+          </div>
+        </div>
+
+        <div class="prof-card animated-item delay-6">
+          <img src="https://ui-avatars.com/api/?name=Tatiana&background=c4b5fd&color=2e1065&bold=true" alt="Prof. Tatiana">
+          <div class="prof-info">
+            <h3>Tatiana</h3>
+            <p><strong>Especialização:</strong> Matemática e Desafios Lógicos.</p>
           </div>
         </div>
       </section>
@@ -737,5 +783,3 @@
   </script>
 </body>
 </html>
-
-```
